@@ -21,25 +21,22 @@ pipeline {
         }
 
         stage('Docker Build') {
-            steps {
-                sh '/opt/homebrew/bin/mvn clean package'
-            }
-        }
+    steps {
+        sh '/usr/local/bin/docker build -t hello-devops-project .'
+    }
+}
 
         stage('Docker Tag') {
-            steps {
-                sh 'docker tag hello-devops-project $IMAGE_NAME:latest'
-            }
-        }
+    steps {
+        sh '/usr/local/bin/docker tag hello-devops-project vruttipatel13/hello-devops-project:latest'
+    }
+}
 
         stage('Docker Push') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                    sh 'echo $PASS | docker login -u $USER --password-stdin'
-                    sh 'docker push $IMAGE_NAME:latest'
-                }
-            }
-        }
+    steps {
+        sh '/usr/local/bin/docker push vruttipatel13/hello-devops-project:latest'
+    }
+}
 
         stage('Deploy') {
             steps {
