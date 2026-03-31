@@ -9,10 +9,10 @@ pipeline {
     stages {
 
         stage('Checkout Code') {
-            steps {
-                git 'https://github.com/menduvada/hello-devops-project.git'
-            }
-        }
+    steps {
+        git branch: 'main', url: 'https://github.com/menduvada/hello-devops-project.git'
+    }
+}
 
         stage('Build (Maven)') {
             steps {
