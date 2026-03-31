@@ -22,7 +22,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t hello-devops-project .'
+                sh '/opt/homebrew/bin/mvn clean package'
             }
         }
 
